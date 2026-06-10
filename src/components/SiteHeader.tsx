@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 
 const links = [
   { to: "/about", label: "/about" },
+  { to: "/experience", label: "/experience" },
   { to: "/projects", label: "/projects" },
   { to: "/blog", label: "/blog" },
   { to: "/resume", label: "/resume" },
@@ -9,7 +10,7 @@ const links = [
 
 export function SiteHeader() {
   return (
-    <header className="pt-16 pb-10">
+    <header className="pt-6 pb-10">
       <Link to="/" className="block">
         <h1 className="font-serif text-6xl md:text-7xl text-foreground leading-none">
           Reuben<span className="caret h-[0.9em] align-[-0.1em]" />

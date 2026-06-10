@@ -1,68 +1,52 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageLayout } from "@/components/PageLayout";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "/projects — Reuben Alabi" },
-      { name: "description", content: "Selected work: Drifto event platform, government tax revenue system, Lagos tourism platform, and Stalwart Crest engineering." },
+      { name: "description", content: "Things I've built: Drifto, an event management and ticketing platform, and Role AI, a role-aware AI assistant for software engineering teams." },
       { property: "og:title", content: "/projects — Reuben Alabi" },
-      { property: "og:description", content: "Selected engineering work across fullstack, backend and platform projects." },
+      { property: "og:description", content: "Things I've built." },
     ],
   }),
   component: Projects,
 });
 
+type ProjectLink = {
+  label: string;
+  href: string;
+};
+
 type Project = {
   name: string;
-  role: string;
-  period: string;
+  tagline: string;
   bullets: string[];
   tags: string[];
+  links: ProjectLink[];
 };
 
 const projects: Project[] = [
   {
     name: "Drifto",
-    role: "Co-Founder & Software Engineer",
-    period: "Jul 2025 — Present",
+    tagline: "Event management and ticketing, live in production. I co-founded it and built every layer of the backend.",
     bullets: [
-      "Architected and shipped the full Spring Boot backend as sole backend engineer, powering event management, auth, and Paystack payments for 500+ users.",
-      "Built the Next.js / React web MVP with design parity to mobile, sustaining 99.5% API uptime and ~250ms average response.",
-      "Owned the full-stack lifecycle: schema design, REST APIs, payment infra and security — concept to revenue-generating platform.",
+      "Spring Boot backend handling event management, authentication, and Paystack payments for 500+ users across live events.",
+      "Next.js/React web app with design parity to the mobile app — 99.5% API uptime, ~250ms average response times.",
+      "End-to-end ownership: database schema, RESTful APIs, payment infrastructure and security.",
     ],
-    tags: ["Spring Boot", "Next.js", "Paystack", "PostgreSQL"],
+    tags: ["Spring Boot", "Next.js", "React", "Paystack", "PostgreSQL"],
+    links: [{ label: "drifto.app", href: "https://www.drifto.app" }],
   },
   {
-    name: "Stalwart Crest",
-    role: "Software Engineer (Remote)",
-    period: "Sep 2023 — Present",
+    name: "Role AI",
+    tagline: "An AI assistant that adapts to your role on an engineering team — requirements, design, or analysis.",
     bullets: [
-      "Engineered dynamic front-end apps with React and Next.js, cutting page load times by 25%.",
-      "Strengthened backend with Spring Security, reducing vulnerabilities by 15%.",
-      "Scaled Spring Boot services through a 30% traffic surge via API integrations and tuning.",
+      "Perspective-driven chat: AI agents that answer as an analyst, a designer, or a requirements engineer would.",
+      "Architectural discussions rendered live — flowcharts, UML and ERDs drawn via Mermaid as you talk — with decision tracking built in.",
+      "Next.js App Router frontend in TypeScript and Tailwind CSS, with Google OAuth and custom JWT auth.",
     ],
-    tags: ["React", "Next.js", "Spring Boot", "Spring Security"],
-  },
-  {
-    name: "Tax Revenue System",
-    role: "Backend Engineer — CSDC Solutions",
-    period: "Jan 2025 — Jun 2025",
-    bullets: [
-      "Maintained and extended a government tax revenue system in Java, boosting system efficiency by ~20%.",
-      "Diagnosed and resolved persistent performance bottlenecks across large-scale deployments.",
-    ],
-    tags: ["Java", "Spring Boot", "Compliance"],
-  },
-  {
-    name: "Lagos Tourism System",
-    role: "Backend Engineer — CSDC Solutions",
-    period: "2025",
-    bullets: [
-      "Built Spring Boot modules for Lagos State tourism, integrating real-time data feeds.",
-      "Improved user engagement by 15% through accessibility and UX-focused backend changes.",
-    ],
-    tags: ["Spring Boot", "Realtime"],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Mermaid", "OAuth"],
+    links: [{ label: "live demo", href: "https://role-ai-frontend.vercel.app" }],
   },
 ];
 
@@ -71,7 +55,14 @@ function Projects() {
     <PageLayout>
       <h2 className="font-serif text-3xl text-foreground">/projects</h2>
       <p className="text-muted-foreground text-sm">
-        Selected work. Listed newest first.
+        Things I've built. For where I've worked, see{" "}
+        <Link
+          to="/experience"
+          className="text-[color:var(--accent)] underline underline-offset-4"
+        >
+          /experience
+        </Link>
+        .
       </p>
       <ul className="space-y-10 pt-4">
         {projects.map((p) => (
@@ -80,11 +71,21 @@ function Projects() {
               <h3 className="font-mono text-[color:var(--accent)]">
                 {p.name}
               </h3>
-              <span className="text-xs text-muted-foreground font-mono">
-                {p.period}
+              <span className="flex gap-3 text-xs font-mono">
+                {p.links.map((l) => (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[color:var(--accent)] underline underline-offset-4"
+                  >
+                    {l.label} ↗
+                  </a>
+                ))}
               </span>
             </div>
-            <p className="text-sm text-muted-foreground">{p.role}</p>
+            <p className="text-sm text-muted-foreground">{p.tagline}</p>
             <ul className="list-disc pl-6 space-y-1 marker:text-muted-foreground text-foreground">
               {p.bullets.map((b, i) => (
                 <li key={i}>{b}</li>

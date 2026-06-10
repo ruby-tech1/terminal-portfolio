@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageLayout } from "@/components/PageLayout";
-import resumeAsset from "@/assets/resume.pdf.asset.json";
+
+const RESUME_URL = "/reuben-alabi-resume.pdf";
 
 export const Route = createFileRoute("/resume")({
   head: () => ({
     meta: [
-      { title: "/resume — Reuben Alabi" },
       { name: "description", content: "Resume of Reuben Alabi, fullstack software engineer." },
       { property: "og:title", content: "/resume — Reuben Alabi" },
       { property: "og:description", content: "Resume — fullstack software engineer." },
@@ -20,7 +20,7 @@ function Resume() {
       <div className="flex items-baseline justify-between gap-4 flex-wrap">
         <h2 className="font-serif text-3xl text-foreground">/resume</h2>
         <a
-          href={resumeAsset.url}
+          href={RESUME_URL}
           download
           className="font-mono text-sm text-[color:var(--accent)] underline underline-offset-4"
         >
@@ -32,12 +32,12 @@ function Resume() {
       </p>
       <div className="border border-border bg-muted h-[80vh] mt-4">
         <object
-          data={resumeAsset.url}
+          data={RESUME_URL}
           type="application/pdf"
           className="w-full h-full"
         >
           <iframe
-            src={resumeAsset.url}
+            src={RESUME_URL}
             className="w-full h-full"
             title="Reuben Alabi resume"
           />

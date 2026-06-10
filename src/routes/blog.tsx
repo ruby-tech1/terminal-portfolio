@@ -4,7 +4,6 @@ import { PageLayout } from "@/components/PageLayout";
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
-      { title: "/blog — Reuben Alabi" },
       { name: "description", content: "Writing on software engineering, backend architecture, and building Drifto." },
       { property: "og:title", content: "/blog — Reuben Alabi" },
       { property: "og:description", content: "Writing — coming soon." },

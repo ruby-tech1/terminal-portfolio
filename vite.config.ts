@@ -10,6 +10,8 @@ export default defineConfig({
   vite: {
     server: { port: 3000 },
   },
+  // Deploy target: Vercel (nitro emits .vercel/output per the Build Output API)
+  nitro: { preset: "vercel" },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this

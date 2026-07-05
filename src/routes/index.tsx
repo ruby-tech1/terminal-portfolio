@@ -5,9 +5,16 @@ import { Typewriter } from "@/components/Typewriter";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { name: "description", content: "Fullstack software engineer and founder. I build clean, scalable systems and intuitive interfaces with Java, Spring Boot, TypeScript and React." },
-      { property: "og:title", content: "Reuben Alabi — Software Engineer & Founder" },
-      { property: "og:description", content: "Fullstack engineer building clean, scalable systems." },
+      {
+        name: "description",
+        content:
+          "Backend engineer building reliable, scalable systems in Java and Spring Boot, paired with React frontends. Head Engineer at Glass Finance, co-founder of Drifto.",
+      },
+      { property: "og:title", content: "Reuben Alabi — Backend Engineer" },
+      {
+        property: "og:description",
+        content: "Backend engineer building reliable, scalable full-stack systems.",
+      },
     ],
   }),
   component: Home,
@@ -17,12 +24,13 @@ function Home() {
   return (
     <PageLayout>
       <p className="text-foreground text-lg">
-        <Typewriter text="Software Engineer. Founder." />
+        <Typewriter text="Backend Engineer. Full-Stack Systems." />
       </p>
       <p className="text-foreground">
-        I'm Reuben. I live mostly on the backend — Java, Spring Boot, NestJS —
-        but I ship the whole stack when the product needs it. Right now that
-        product is{" "}
+        I'm Reuben. I live mostly on the backend — Java, Spring Boot, NestJS — but I ship the whole
+        stack when the product needs it. Right now I'm Head Engineer at Glass Finance, a community
+        finance layer, driving architecture and deployment from concept to production. I also
+        co-founded{" "}
         <a
           href="https://www.drifto.app"
           target="_blank"
@@ -31,13 +39,12 @@ function Home() {
         >
           Drifto
         </a>
-        , an event platform I co-founded and whose entire backend I designed
-        and built.
+        , an event platform whose entire backend I designed and built.
       </p>
       <p className="text-foreground">
-        I've done this for startups and for government-scale systems alike:
-        payments infrastructure, tax processing, real-time data — the
-        unglamorous machinery that has to work every time.
+        I've done this for startups and for government-scale systems alike: payments infrastructure,
+        tax processing, property verification, real-time data — the unglamorous machinery that has
+        to work every time.
       </p>
 
       <p className="pt-4 text-foreground">Some of the stuff I made:</p>
@@ -45,15 +52,15 @@ function Home() {
         <li>
           <span className="font-mono text-[color:var(--accent)]">Drifto</span>
           <span className="text-foreground">
-            : event management and ticketing — payments, auth, 500+ users, live
-            and revenue-generating.
+            : event management and ticketing — idempotent payments, auth, 500+ users, live and
+            revenue-generating.
           </span>
         </li>
         <li>
           <span className="font-mono text-[color:var(--accent)]">Role_AI</span>
           <span className="text-foreground">
-            : an AI assistant that adapts to your role on an engineering team —
-            chat with live UML, ERD and flowchart rendering.
+            : an AI assistant that adapts to your role on an engineering team — chat with live UML,
+            ERD and flowchart rendering.
           </span>
         </li>
       </ul>
@@ -62,8 +69,8 @@ function Home() {
         More on{" "}
         <Link to="/projects" className="text-[color:var(--accent)] underline underline-offset-4">
           /projects
-        </Link>
-        {" "}— or see where I've worked on{" "}
+        </Link>{" "}
+        — or see where I've worked on{" "}
         <Link to="/experience" className="text-[color:var(--accent)] underline underline-offset-4">
           /experience
         </Link>

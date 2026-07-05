@@ -36,8 +36,8 @@ function About() {
         These days that means{" "}
         <span className="text-[color:var(--accent)] font-mono">Glass Finance</span>, a community
         finance layer where I'm Head Engineer — I shaped the architecture and shipped a Spring Boot
-        backend of 173 REST endpoints across 16 domains, including an obligation engine that posts
-        member dues to a double-entry ledger. It also means{" "}
+        backend of 173 REST endpoints across 16 domains, including an obligation collectins engine
+        for members dues. It also means{" "}
         <span className="text-[color:var(--accent)] font-mono">Drifto</span>, an event platform I
         co-founded: as the sole backend engineer I took it from an empty repo to a live,
         revenue-generating product on AWS — idempotent payments, authentication and event management

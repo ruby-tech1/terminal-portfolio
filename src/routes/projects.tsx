@@ -57,55 +57,81 @@ const projects: Project[] = [
   },
 ];
 
+// IDE control dots
+function ControlDots() {
+  return (
+    <div className="flex gap-1.5">
+      <span className="ide-dot" style={{ background: "rgba(255,96,96,0.5)", border: "1px solid rgba(255,96,96,0.3)" }} />
+      <span className="ide-dot" style={{ background: "rgba(255,189,68,0.5)", border: "1px solid rgba(255,189,68,0.3)" }} />
+      <span className="ide-dot" style={{ background: "rgba(0,255,136,0.5)", border: "1px solid rgba(0,255,136,0.3)" }} />
+    </div>
+  );
+}
+
 function Projects() {
   return (
-    <PageLayout>
-      <h2 className="font-serif text-3xl text-foreground">/projects</h2>
-      <p className="text-muted-foreground text-sm">
-        Things I've built. For where I've worked, see{" "}
-        <Link to="/experience" className="text-[color:var(--accent)] underline underline-offset-4">
-          /experience
-        </Link>
-        .
-      </p>
-      <ul className="space-y-10 pt-4">
-        {projects.map((p) => (
-          <li key={p.name} className="space-y-2">
-            <div className="flex items-baseline justify-between gap-4 flex-wrap">
-              <h3 className="font-mono text-[color:var(--accent)]">{p.name}</h3>
-              <span className="flex gap-3 text-xs font-mono">
-                {p.links.map((l) => (
-                  <a
-                    key={l.href}
-                    href={l.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-[color:var(--accent)] underline underline-offset-4"
-                  >
-                    {l.label} ↗
-                  </a>
-                ))}
-              </span>
-            </div>
-            <p className="text-sm text-muted-foreground">{p.tagline}</p>
-            <ul className="list-disc pl-6 space-y-1 marker:text-muted-foreground text-foreground">
-              {p.bullets.map((b, i) => (
-                <li key={i}>{b}</li>
-              ))}
-            </ul>
-            <div className="flex flex-wrap gap-2 pt-1">
-              {p.tags.map((t) => (
-                <span
-                  key={t}
-                  className="font-mono text-xs text-muted-foreground border border-border px-2 py-0.5"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          </li>
-        ))}
-      </ul>
-    </PageLayout>
+    <>
+      <PageLayout>
+        <h2 className="font-serif text-3xl text-foreground">/projects</h2>
+        <p className="text-muted-foreground text-sm">
+          Things I've built. For where I've worked, see{" "}
+          <Link to="/experience" className="accent-link">
+            /experience
+          </Link>
+          .
+        </p>
+        <ul className="space-y-8 pt-4">
+          {projects.map((p, idx) => {
+            const delay = idx * 80;
+            return (
+              <li
+                key={p.name}
+                className="ide-card page-enter"
+                style={{ animationDelay: `${delay}ms` }}
+              >
+                {/* IDE title bar */}
+                <div className="ide-card-header">
+                  <ControlDots />
+                  <span className="font-mono text-xs text-muted-foreground ml-1">
+                    {p.name.toLowerCase().replace(/\s/g, "_")}.md
+                  </span>
+                  <span className="ml-auto flex gap-3 text-xs font-mono">
+                    {p.links.map((l) => (
+                      <a
+                        key={l.href}
+                        href={l.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="accent-link"
+                      >
+                        {l.label} ↗
+                      </a>
+                    ))}
+                  </span>
+                </div>
+
+                {/* Card body */}
+                <div className="ide-card-body space-y-3">
+                  <div className="flex items-baseline gap-3 flex-wrap">
+                    <h3 className="font-mono text-[color:var(--accent)] text-base">{p.name}</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{p.tagline}</p>
+                  <ul className="list-disc pl-5 space-y-1 marker:text-muted-foreground text-foreground text-sm">
+                    {p.bullets.map((b, i) => (
+                      <li key={i}>{b}</li>
+                    ))}
+                  </ul>
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {p.tags.map((t) => (
+                      <span key={t} className="tag-chip font-mono">{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </PageLayout>
+    </>
   );
 }

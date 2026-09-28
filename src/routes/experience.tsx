@@ -25,6 +25,7 @@ type Role = {
   period: string;
   bullets: string[];
   tags: string[];
+  isLive?: boolean;
 };
 
 const roles: Role[] = [
@@ -32,6 +33,7 @@ const roles: Role[] = [
     title: "Head Engineer, Platform & Backend Architecture",
     company: "Glass Finance (Remote)",
     period: "May 2026 — Present",
+    isLive: true,
     bullets: [
       "Shaped the technical direction for a community finance layer — requirements, architecture and deployment from concept to production.",
       "Architected and shipped the backend: 173 REST endpoints across 16 domains in Java and Spring Boot.",
@@ -44,6 +46,7 @@ const roles: Role[] = [
     title: "Backend Engineer & Co-founder",
     company: "Drifto",
     period: "Jul 2025 — Present",
+    isLive: true,
     bullets: [
       "Sole backend engineer: architected and shipped the entire Spring Boot backend on AWS, powering web, iOS and Android clients for 500+ users at ~95% ticket fulfillment.",
       "Built a payment pipeline with idempotent webhooks and async processing, preventing duplicate charges across every transaction.",
@@ -55,6 +58,7 @@ const roles: Role[] = [
     title: "Backend Engineer (Part-time)",
     company: "Luxnet (Remote)",
     period: "May 2025 — Present",
+    isLive: true,
     bullets: [
       "Architected and shipped the NestJS backend for Verrify, a property allocation & verification platform — 75 REST endpoints across 12 domains on PostgreSQL/TypeORM.",
       "Built PostGIS geospatial search — viewport, location and radius queries powering the platform's interactive property map.",
@@ -97,37 +101,75 @@ const roles: Role[] = [
   },
 ];
 
+// IDE control dots
+function ControlDots() {
+  return (
+    <div className="flex gap-1.5">
+      <span className="ide-dot" style={{ background: "rgba(255,96,96,0.5)", border: "1px solid rgba(255,96,96,0.3)" }} />
+      <span className="ide-dot" style={{ background: "rgba(255,189,68,0.5)", border: "1px solid rgba(255,189,68,0.3)" }} />
+      <span className="ide-dot" style={{ background: "rgba(0,255,136,0.5)", border: "1px solid rgba(0,255,136,0.3)" }} />
+    </div>
+  );
+}
+
 function Experience() {
   return (
-    <PageLayout>
-      <h2 className="font-serif text-3xl text-foreground">/experience</h2>
-      <p className="text-muted-foreground text-sm">Where I've worked. Current roles first.</p>
-      <ul className="space-y-10 pt-4">
-        {roles.map((r) => (
-          <li key={r.company} className="space-y-2">
-            <div className="flex items-baseline justify-between gap-4 flex-wrap">
-              <h3 className="font-mono text-[color:var(--accent)]">{r.company}</h3>
-              <span className="text-xs text-muted-foreground font-mono">{r.period}</span>
-            </div>
-            <p className="text-sm text-muted-foreground">{r.title}</p>
-            <ul className="list-disc pl-6 space-y-1 marker:text-muted-foreground text-foreground">
-              {r.bullets.map((b, i) => (
-                <li key={i}>{b}</li>
-              ))}
-            </ul>
-            <div className="flex flex-wrap gap-2 pt-1">
-              {r.tags.map((t) => (
-                <span
-                  key={t}
-                  className="font-mono text-xs text-muted-foreground border border-border px-2 py-0.5"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          </li>
-        ))}
-      </ul>
-    </PageLayout>
+    <>
+      <PageLayout>
+        <h2 className="font-serif text-3xl text-foreground">/experience</h2>
+        <p className="text-muted-foreground text-sm">Where I've worked. Current roles first.</p>
+
+        <ul className="timeline-list space-y-8 pt-4">
+          {roles.map((r, idx) => {
+            const delay = idx * 70;
+            return (
+              <li
+                key={r.company}
+                className={`timeline-item ide-card page-enter ${r.isLive ? "is-live" : ""}`}
+                style={{ animationDelay: `${delay}ms` }}
+              >
+                {/* IDE title bar */}
+                <div className="ide-card-header">
+                  <ControlDots />
+                  <span className="font-mono text-xs text-muted-foreground ml-1 truncate">
+                    {r.company.toLowerCase().replace(/[\s()]/g, "_")}.log
+                  </span>
+                  <div className="ml-auto flex items-center gap-3">
+                    <span className="text-xs text-muted-foreground font-mono hidden sm:block">
+                      {r.period}
+                    </span>
+                    {r.isLive && (
+                      <span className="live-badge">
+                        <span className="live-dot" />
+                        live
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Card body */}
+                <div className="ide-card-body space-y-3">
+                  <div className="flex items-start justify-between gap-3 flex-wrap">
+                    <h3 className="font-mono text-[color:var(--accent)] text-sm">{r.company}</h3>
+                    <span className="text-xs text-muted-foreground font-mono sm:hidden">{r.period}</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{r.title}</p>
+                  <ul className="list-disc pl-5 space-y-1 marker:text-muted-foreground text-foreground text-sm">
+                    {r.bullets.map((b, i) => (
+                      <li key={i}>{b}</li>
+                    ))}
+                  </ul>
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {r.tags.map((t) => (
+                      <span key={t} className="tag-chip font-mono">{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </PageLayout>
+    </>
   );
 }

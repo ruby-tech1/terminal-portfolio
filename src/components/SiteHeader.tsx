@@ -11,7 +11,7 @@ const links = [
 export function SiteHeader() {
   return (
     <header className="pt-6 pb-10">
-      <Link to="/" className="block">
+      <Link to="/" className="block hero-glow w-fit">
         <h1 className="font-serif text-6xl md:text-7xl text-foreground leading-none">
           Reuben<span className="caret h-[0.9em] align-[-0.1em]" />
         </h1>
@@ -21,8 +21,8 @@ export function SiteHeader() {
           <Link
             key={l.to}
             to={l.to}
-            className="text-[color:var(--accent)] underline underline-offset-4 decoration-[color:var(--accent)]/40 hover:decoration-[color:var(--accent)] transition"
-            activeProps={{ className: "text-[color:var(--accent)] underline underline-offset-4 decoration-[color:var(--accent)]" }}
+            className="nav-glow text-[color:var(--accent)] underline underline-offset-4 decoration-[color:var(--accent)]/40 hover:decoration-[color:var(--accent)] transition"
+            activeProps={{ className: "nav-glow text-[color:var(--accent)] underline underline-offset-4 decoration-[color:var(--accent)]" }}
           >
             {l.label}
           </Link>

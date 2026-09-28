@@ -8,19 +8,19 @@ export function PageLayout({ children }: { children: ReactNode }) {
   const isHome = pathname === "/";
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="relative min-h-screen bg-background" style={{ zIndex: 1 }}>
       <div className="mx-auto max-w-2xl px-6 pt-10">
         {!isHome && (
           <Link
             to="/"
             aria-label="Back to home"
-            className="inline-block font-mono text-sm text-muted-foreground underline underline-offset-4 decoration-border hover:text-foreground hover:decoration-foreground transition"
+            className="inline-block font-mono text-sm text-muted-foreground underline underline-offset-4 decoration-border hover:text-foreground hover:decoration-foreground hover:text-shadow transition"
           >
             ..
           </Link>
         )}
         <SiteHeader />
-        <main className="space-y-6 text-foreground leading-relaxed">{children}</main>
+        <main className="page-enter space-y-6 text-foreground leading-relaxed">{children}</main>
         <SiteFooter />
       </div>
     </div>
